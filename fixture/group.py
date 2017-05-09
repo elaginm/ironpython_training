@@ -1,7 +1,10 @@
 import clr
 import sys
-sys.path.append("C:\\Project\\ironpython_training\\TestStack.White.0.13.3\\lib\\net40\\")
-sys.path.append("C:\\Project\\ironpython_training\\Castle.Core.3.3.0\\lib\\net40-client\\")
+import os.path
+
+project_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+sys.path.append(os.path.join(project_dir, "TestStack.White.0.13.3\\lib\\net40\\"))
+sys.path.append(os.path.join(project_dir, "Castle.Core.3.3.0\\lib\\net40-client\\"))
 clr.AddReferenceByName('TestStack.White')
 
 from TestStack.White import Application
@@ -20,6 +23,7 @@ class GroupHelper:
     def open_group_editor(self, main_window):
         main_window.Get(SearchCriteria.ByAutomationId("groupButton")).Click()
         modal = main_window.ModalWindow("Group editor")
+
         return modal
 
     def close_group_editor(self, modal):

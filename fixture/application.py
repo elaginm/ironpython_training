@@ -1,7 +1,9 @@
 import clr
 import sys
-sys.path.append("C:\\Project\\ironpython_training\\TestStack.White.0.13.3\\lib\\net40\\")
-sys.path.append("C:\\Project\\ironpython_training\\Castle.Core.3.3.0\\lib\\net40-client\\")
+import os.path
+project_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+sys.path.append(os.path.join(project_dir, "TestStack.White.0.13.3\\lib\\net40\\"))
+sys.path.append(os.path.join(project_dir, "Castle.Core.3.3.0\\lib\\net40-client\\"))
 clr.AddReferenceByName('TestStack.White')
 
 from TestStack.White import Application
@@ -13,12 +15,15 @@ clr.AddReferenceByName('UIAutomationTypes, Version=4.0.0.0, Culture=neutral, Pub
 from System.Windows.Automation import *
 from fixture.group import GroupHelper
 
+
 class Application1:
 
     def __init__(self):
         self.group = GroupHelper(self)
-        self.application = Application.Launch("c:\\Project\\AddressBook\\AddressBook.exe")
+        app_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../..")
+        self.application = Application.Launch(os.path.join(app_dir, "AddressBook\\AddressBook.exe"))
         self.main_window = self.application.GetWindow("Free Address Book")
+
 
     def close_app(self):
         self.main_window.Get(SearchCriteria.ByAutomationId("uxExitAddressButton")).Click()

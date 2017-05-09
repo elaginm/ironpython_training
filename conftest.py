@@ -1,12 +1,16 @@
 import pytest
 import os.path
+import clr
 from fixture.application import Application1
 from model.group import Group
+
+
 fixture = None
 
-import clr
+
 clr.AddReferenceByName('Microsoft.Office.Interop.Excel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c')
 from Microsoft.Office.Interop import Excel
+
 
 @pytest.fixture()
 def app(request):
